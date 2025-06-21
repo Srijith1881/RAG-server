@@ -31,3 +31,29 @@ uvicorn metrics_lambda.metrics_summary:app --host 0.0.0.0 --port 8004 --reload
 metrics_lambda.query_log_api:app --host 0.0.0.0 --port 8005 --reload  
 python setup_localstack.py 
 python verify_localstack.py   
+
+
+docker tag pdf_services yourdockerhub/pdf_services:latest
+docker tag rag_module yourdockerhub/rag_module:latest
+docker tag aws_service yourdockerhub/aws_service:latest
+docker tag metrics_lambda yourdockerhub/metrics_lambda:latest
+docker tag frontend yourdockerhub/frontend:latest
+docker tag backend yourdockerhub/backend:latest
+
+
+
+
+python -m venv .venv
+.\.venv\Scripts\activate
+pip install -r requirements.txt
+docker-compose -f docker-compose.yml up -d 
+docker ps
+curl http://localhost:4566/health
+uvicorn pdf_services.main:app --host 0.0.0.0 --port 8001 --reload   
+uvicorn rag_module.main:app --host 0.0.0.0 --port 8002 --reload  
+uvicorn aws_service.router:app --host 0.0.0.0 --port 8003 --reload 
+uvicorn metrics_lambda.metrics_summary:app --host 0.0.0.0 --port 8004 --reload 
+uvicorn metrics_lambda.query_log_api:app --host 0.0.0.0 --port 8005 --reload  
+python -m scripts.deploy_lambda
+python -m scripts.setup_localstack   
+python -m scripts.verify_localstack   

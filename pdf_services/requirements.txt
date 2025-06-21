@@ -1,7 +1,6 @@
 fastapi
 uvicorn
 PyMuPDF
-fitz
 python-multipart
 langchain-community
 boto3

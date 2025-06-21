@@ -1,0 +1,165 @@
+RAG SERVER - POSTMAN API SNIPPETS
+=====================================
+
+BASE URLS:
+- PDF Services: http://localhost:8001
+- RAG Module: http://localhost:8002  
+- AWS Service: http://localhost:8003
+- Metrics Summary: http://localhost:8004
+- Query Log API: http://localhost:8005
+
+=====================================
+PDF SERVICES (Port 8001)
+=====================================
+
+1. UPLOAD PDF FILE
+Method: POST
+URL: http://localhost:8001/upload
+Parameters: 
+- Body: form-data
+- Key: file (Type: File)
+- Value: [Select PDF file]
+
+2. RETRIEVE FILE METADATA
+Method: GET
+URL: http://localhost:8001/retrieve/{file_id}
+Parameters:
+- Path: file_id (string) - UUID of uploaded file
+
+3. LIST ALL FILES
+Method: GET
+URL: http://localhost:8001/list
+Parameters:
+- Query: page (int, default: 1) - Page number for pagination
+- Query: limit (int, default: 10) - Number of items per page
+
+=====================================
+RAG MODULE (Port 8002)
+=====================================
+
+4. QUERY DOCUMENTS
+Method: POST
+URL: http://localhost:8002/query
+Parameters:
+- Body: raw (JSON)
+{
+    "query": "Your question here",
+    "file_key": "optional_file_id"
+}
+
+=====================================
+AWS SERVICE (Port 8003)
+=====================================
+
+5. RECEIVE METRICS
+Method: POST
+URL: http://localhost:8003/metrics
+Parameters:
+- Body: raw (JSON)
+{
+    "run_id": "uuid_string",
+    "tokens_used": 150,
+    "confidence_score": 0.92,
+    "response_time": 1.25,
+    "file_id": "optional_file_id"
+}
+
+=====================================
+METRICS SUMMARY (Port 8004)
+=====================================
+
+6. GET METRICS SUMMARY
+Method: GET
+URL: http://localhost:8004/metrics/summary
+Parameters: None
+
+=====================================
+QUERY LOG API (Port 8005)
+=====================================
+
+7. GET QUERY LOGS
+Method: GET
+URL: http://localhost:8005/query-log
+Parameters:
+- Query: limit (int, default: 10) - Number of recent logs to return
+
+8. GET LOGS FOR SPECIFIC FILE
+Method: GET
+URL: http://localhost:8005/query-log/{file_id}
+Parameters:
+- Path: file_id (string) - UUID of the file
+
+9. EXPORT QUERY LOGS
+Method: GET
+URL: http://localhost:8005/query-log/export
+Parameters:
+- Query: format (string, enum: ["json", "csv"], default: "json")
+
+=====================================
+EXAMPLE REQUESTS
+=====================================
+
+PDF Upload Example:
+POST http://localhost:8001/upload
+Content-Type: multipart/form-data
+Body: file=@document.pdf
+
+Query Example:
+POST http://localhost:8002/query
+Content-Type: application/json
+Body: {
+    "query": "What is the main topic of this document?",
+    "file_key": "123e4567-e89b-12d3-a456-426614174000"
+}
+
+Metrics Example:
+POST http://localhost:8003/metrics
+Content-Type: application/json
+Body: {
+    "run_id": "abc123-def456",
+    "tokens_used": 250,
+    "confidence_score": 0.95,
+    "response_time": 2.1,
+    "file_id": "123e4567-e89b-12d3-a456-426614174000"
+}
+
+=====================================
+RATE LIMITS
+=====================================
+- PDF Upload: 5 requests/minute
+- File Retrieval: 20 requests/minute
+- File Listing: 10 requests/minute
+- RAG Queries: 10 requests/minute
+- Metrics: No explicit limit
+- Query Logs: No explicit limit
+
+=====================================
+RESPONSE FORMATS
+=====================================
+
+Success Response (200):
+{
+    "status": "success",
+    "data": {...}
+}
+
+Error Response (4xx/5xx):
+{
+    "detail": "Error message"
+}
+
+Rate Limit Response (429):
+{
+    "detail": "Rate limit exceeded"
+}
+
+=====================================
+NOTES
+=====================================
+- All services use CORS with allow_origins=["*"]
+- File uploads only accept PDF files
+- Encrypted PDFs are not supported
+- All timestamps are in ISO format
+- UUIDs are used for file_id and run_id
+- DynamoDB tables: PDF_Metadata, LLM_Metrics, QueryLog
+- S3 bucket: pdf-storage-local (LocalStack) 
