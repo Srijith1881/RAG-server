@@ -1,6 +1,6 @@
-                                                                                       # 👋🏻 Hello, this is Srijith
+# 👋🏻 Hello, this is Srijith
 
-                                                                              # PDF Based RAG (Retrieval-Augmented Generation)
+# PDF Based RAG (Retrieval-Augmented Generation)
 
 A robust, hybrid RAG backend for PDF querying with a microservice architecture. Seamlessly blending AWS and LocalStack, it features perfectly separated sections, ensuring scalability and maintainability.
 
