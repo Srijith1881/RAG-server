@@ -253,6 +253,13 @@ Replace `<account-id>` with your AWS account ID.
 | **Response Formats** | \- Success: {"status": "success", "data": {...}}<br>- Error: {"detail": "Error message"}<br>- Rate Limit: {"detail": "Rate limit exceeded"} |
 | **Notes** | \- CORS: allow_origins=\["\*"\]<br>- Only PDFs accepted<br>- No encrypted PDFs<br>- Timestamps in ISO format |
 
+## 📋 Notes
+
+- .env.example for Localdev
+- .env.production and docker-compose.production.yml for Production
+- commands.txt for Verifying Commands
+- Postman Snipets for API Testing
+
 ## 🌐 Frontend Repo
 
 https://github.com/Srijith1881/pdf-rag-client
