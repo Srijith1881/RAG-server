@@ -43,6 +43,9 @@ A microservice architecture with:
 - **AWS Service**: Interfaces with S3 and DynamoDB.
 - **Metrics & Logs**: Tracks and exports metrics/logs.
 - **Hybrid Toggle**: `USE_LOCALSTACK=true` switches between AWS and LocalStack.
+📈**Architecture Diagram**:
+  ![rag architecture](https://github.com/user-attachments/assets/8988c36e-afb6-4d2a-8709-9376330a343b)
+
 
 ## 🚀 Quick Start
 
