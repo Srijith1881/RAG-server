@@ -18,7 +18,7 @@ A robust, hybrid RAG backend for PDF querying with a microservice architecture. 
 
 ## 📝 Introduction
 
-This is production-grade backend of a RAG system designed for intelligent PDF processing, persistent vector storage, and precise domain-specific responses. Its hybrid nature supports AWS and LocalStack, driven by a microservice architecture with robust error handling and modular design. Built to scale, it’s interview-ready and constraint-respecting.
+This is production-grade backend of a RAG system designed for intelligent PDF processing, persistent vector storage, and precise domain-specific responses. Its hybrid nature supports AWS and LocalStack, driven by a microservice architecture with robust error handling and modular design. Built to scale, it’s interview-ready and constraint-respecting. Walkthrough(https://youtu.be/MdZ4X1PyxUc)
 
 ## 🌟 Key Features You Can’t Ignore
 
