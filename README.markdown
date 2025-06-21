@@ -265,7 +265,7 @@ Replace `<account-id>` with your AWS account ID.
 
 ## 🌐 Frontend Repo
 
-https://github.com/Srijith1881/pdf-rag-client
+https://github.com/Srijith1881/RAG-client
 
 steps:
 
